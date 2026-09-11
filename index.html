@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bus Pass System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eaf3f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1769aa;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #1769aa;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🚌 Bus Pass System</h1>
+
+    <label>Student Name</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label>College Name</label>
+    <input type="text" id="college" placeholder="Enter college name">
+
+    <label>Route</label>
+    <select id="route">
+        <option value="">Select Route</option>
+        <option>Chennai - Anna Nagar</option>
+        <option>Chennai - Tambaram</option>
+        <option>Chennai - Avadi</option>
+        <option>Chennai - Vellore</option>
+    </select>
+
+    <label>Pass Type</label>
+    <select id="passType">
+        <option value="">Select Pass Type</option>
+        <option>Monthly Pass</option>
+        <option>Quarterly Pass</option>
+    </select>
+
+    <button onclick="applyPass()">Apply for Bus Pass</button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+function applyPass() {
+
+    let name = document.getElementById("name").value;
+    let college = document.getElementById("college").value;
+    let route = document.getElementById("route").value;
+    let passType = document.getElementById("passType").value;
+
+    if (name === "" || college === "" || route === "" || passType === "") {
+        alert("Please fill all the details.");
+        return;
+    }
+
+    let result = document.getElementById("result");
+
+    result.style.display = "block";
+
+        let passId = "BP" + Math.floor(100000 + Math.random() * 900000);
+
+    result.innerHTML =
+        "<h3>🎫 Bus Pass Generated</h3>" +
+        "<p><b>Pass ID:</b> " + passId + "</p>" +
+        "<p>🔳 Scan Pass ID: " + passId + "</p>" +
+        "<p><b>Name:</b> " + name + "</p>" +
+        "<p><b>College:</b> " + college + "</p>" +
+        "<p><b>Route:</b> " + route + "</p>" +
+        "<p><b>Pass Type:</b> " + passType + "</p>" +
+        "<p><b>Status:</b> <span id='status'>Pending</span></p>" +
+"<button onclick='approvePass()'>✅ Approve Pass</button>" +
+"<button onclick='window.print()'>🖨️ Print Bus Pass</button>" +
+"<button onclick='newApplication()'>🔄 New Application</button>";
+}
+function newApplication() {
+    document.getElementById("name").value = "";
+    document.getElementById("college").value = "";
+    document.getElementById("route").value = "";
+    document.getElementById("passType").value = "";
+    document.getElementById("result").style.display = "none";
+}
+function approvePass() {
+    document.getElementById("status").textContent = "Approved";
+}
+</script>
+
+</body>
+</html>
